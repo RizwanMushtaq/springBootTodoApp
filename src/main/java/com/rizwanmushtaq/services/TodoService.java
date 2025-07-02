@@ -20,8 +20,8 @@ public abstract class TodoService {
     return TodoRepository.createTodo(todo);
   }
 
-  public static Todo updateTodo(Todo todo) {
-    return TodoRepository.updateTodo(todo);
+  public static Todo updateTodo(int id, Todo todo) {
+    return TodoRepository.updateTodo(id, todo);
   }
 
   public static Todo deleteTodo(int id) {

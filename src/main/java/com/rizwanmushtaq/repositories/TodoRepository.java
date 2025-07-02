@@ -30,11 +30,13 @@ public abstract class TodoRepository {
     return todo;
   }
 
-  public static Todo updateTodo(Todo todo) {
-    for (int i = 0; i < todos.size(); i++) {
-      if (todos.get(i).getId() == todo.getId()) {
-        todos.set(i, todo);
-        return todo;
+  public static Todo updateTodo(int id, Todo todo) {
+    for (Todo todoItem : todos) {
+      if (todoItem.getId() == id) {
+        todoItem.setTitle(todo.getTitle());
+        todoItem.setContent(todo.getContent());
+        todoItem.setStatus(todo.getStatus());
+        return todoItem;
       }
     }
     return null;

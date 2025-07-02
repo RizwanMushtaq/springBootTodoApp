@@ -35,9 +35,10 @@ public class TodoController extends ApiBaseController {
     return ResponseEntity.status(HttpStatus.CREATED).body(TodoService.createTodo(todo));
   }
 
-  @PutMapping("/todos/update")
-  public ResponseEntity<Todo> updateTodo(@RequestBody Todo todo) {
-    return ResponseEntity.ok(TodoService.updateTodo(todo));
+  @PutMapping("/todos/update/{id}")
+  public ResponseEntity<Todo> updateTodo(@PathVariable int id,
+                                         @RequestBody Todo todo) {
+    return ResponseEntity.ok(TodoService.updateTodo(id, todo));
   }
 
   @DeleteMapping("/todos/delete/{id}")
