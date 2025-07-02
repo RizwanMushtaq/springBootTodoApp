@@ -2,6 +2,9 @@ package com.rizwanmushtaq.controllers;
 
 import com.rizwanmushtaq.models.Todo;
 import com.rizwanmushtaq.services.TodoService;
+import com.rizwanmushtaq.utils.ErrorResponse;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,8 +17,12 @@ public class TodoController extends ApiBaseController {
   }
 
   @GetMapping("/todos/{id}")
-  public Todo getTodoById(@PathVariable int id) {
-    return TodoService.getTodoById(id);
+  public ResponseEntity<Object> getTodoById(@PathVariable int id) {
+    Todo todo = TodoService.getTodoById(id);
+    return todo != null ?
+        ResponseEntity.ok(todo) :
+        ResponseEntity.status(HttpStatus.NOT_FOUND).body(
+            new ErrorResponse("Todo with ID " + id + " not found"));
   }
 
   @PostMapping("/todos/create")
