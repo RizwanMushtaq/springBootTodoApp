@@ -16,8 +16,8 @@ public class TodoController extends ApiBaseController {
   Logger logger = LoggerFactory.getLogger(TodoController.class);
 
   @GetMapping("/todos")
-  public List<Todo> getTodos() {
-    return TodoService.getTodos();
+  public ResponseEntity<List<Todo>> getTodos() {
+    return ResponseEntity.ok(TodoService.getTodos());
   }
 
   @GetMapping("/todos/{id}")
@@ -30,14 +30,14 @@ public class TodoController extends ApiBaseController {
   }
 
   @PostMapping("/todos/create")
-  public Todo createTodo(@RequestBody Todo todo) {
+  public ResponseEntity<Todo> createTodo(@RequestBody Todo todo) {
     logger.info("Create Todo");
-    return TodoService.createTodo(todo);
+    return ResponseEntity.status(HttpStatus.CREATED).body(TodoService.createTodo(todo));
   }
 
   @PutMapping("/todos/update")
-  public Todo updateTodo(@RequestBody Todo todo) {
-    return TodoService.updateTodo(todo);
+  public ResponseEntity<Todo> updateTodo(@RequestBody Todo todo) {
+    return ResponseEntity.ok(TodoService.updateTodo(todo));
   }
 
   @DeleteMapping("/todos/delete/{id}")
