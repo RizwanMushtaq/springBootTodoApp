@@ -36,8 +36,12 @@ public class TodoController extends ApiBaseController {
   }
 
   @DeleteMapping("/todos/delete/{id}")
-  public boolean deleteTodo(@PathVariable int id) {
-    return TodoService.deleteTodo(id);
+  public ResponseEntity<Object> deleteTodo(@PathVariable int id) {
+    Todo todo = TodoService.deleteTodo(id);
+    return todo != null ?
+        ResponseEntity.ok(todo) :
+        ResponseEntity.status(HttpStatus.NOT_FOUND).body(
+            new ErrorResponse("Todo with ID " + id + " not found"));
   }
 }
 

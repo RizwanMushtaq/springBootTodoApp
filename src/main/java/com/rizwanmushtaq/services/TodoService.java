@@ -24,7 +24,7 @@ public abstract class TodoService {
     return TodoRepository.updateTodo(todo);
   }
 
-  public static boolean deleteTodo(int id) {
+  public static Todo deleteTodo(int id) {
     return TodoRepository.deleteTodo(id);
   }
 }

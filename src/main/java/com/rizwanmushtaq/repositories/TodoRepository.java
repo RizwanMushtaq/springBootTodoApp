@@ -36,13 +36,13 @@ public abstract class TodoRepository {
     return null;
   }
 
-  public static boolean deleteTodo(int id) {
+  public static Todo deleteTodo(int id) {
     for (Todo todo : todos) {
       if (todo.getId() == id) {
         todos.remove(todo);
-        return true;
+        return todo;
       }
     }
-    return false;
+    return null;
   }
 }
