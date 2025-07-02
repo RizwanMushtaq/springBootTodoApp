@@ -25,7 +25,6 @@ public class FileController extends ApiBaseController {
     logger.info("Name: {}", file.getName());
     logger.info("Content Type: {}", file.getContentType());
     logger.info("Original File Name: {}", file.getOriginalFilename());
-    logger.info("File Size: {} bytes", file.getSize());
     InputStream inputStream = file.getInputStream();
     FileOutputStream fileOutputStream =
         new FileOutputStream("uploaded_" + Math.random() * 999 + file.getOriginalFilename());
