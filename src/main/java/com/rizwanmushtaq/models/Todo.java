@@ -1,6 +1,7 @@
 package com.rizwanmushtaq.models;
 
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Todo {
   private static int idCounter = 0;
@@ -8,14 +9,14 @@ public class Todo {
   private String title;
   private String content;
   private String status;
-  private Date creationDate;
+  private String creationDate;
 
   public Todo() {
     this.setId(++idCounter);
     this.setTitle("default value");
     this.setContent("default content");
     this.setStatus("New");
-    this.setCreationDate(new Date());
+    this.setCreationDate();
   }
 
   public Todo(String title, String content, String status) {
@@ -23,15 +24,16 @@ public class Todo {
     this.setTitle(title);
     this.setContent(content);
     this.setStatus(status);
-    this.setCreationDate(new Date());
+    this.setCreationDate();
   }
 
-  public Date getCreationDate() {
+  public String getCreationDate() {
     return creationDate;
   }
 
-  private void setCreationDate(Date creationDate) {
-    this.creationDate = creationDate;
+  public void setCreationDate() {
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+    this.creationDate = LocalDateTime.now().format(formatter);
   }
 
   public int getId() {
@@ -73,6 +75,7 @@ public class Todo {
         ", title='" + title + '\'' +
         ", content='" + content + '\'' +
         ", status='" + status + '\'' +
+        ", creationDate=" + creationDate +
         '}';
   }
 }

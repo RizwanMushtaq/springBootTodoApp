@@ -31,7 +31,7 @@ public class TodoController extends ApiBaseController {
 
   @PostMapping("/todos/create")
   public ResponseEntity<Todo> createTodo(@RequestBody Todo todo) {
-    logger.info("Create Todo");
+    logger.info("Created Todo" + todo.toString());
     return ResponseEntity.status(HttpStatus.CREATED).body(TodoService.createTodo(todo));
   }
 
