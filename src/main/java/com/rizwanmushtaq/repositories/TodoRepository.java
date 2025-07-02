@@ -1,10 +1,12 @@
 package com.rizwanmushtaq.repositories;
 
 import com.rizwanmushtaq.models.Todo;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Repository
 public abstract class TodoRepository {
   private static List<Todo> todos = new ArrayList<>();
 

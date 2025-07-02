@@ -2,10 +2,12 @@ package com.rizwanmushtaq.services;
 
 import com.rizwanmushtaq.models.Todo;
 import com.rizwanmushtaq.repositories.TodoRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Service
 public abstract class TodoService {
   public static List<Todo> getTodos() {
     List<Todo> todos = new ArrayList<>();
