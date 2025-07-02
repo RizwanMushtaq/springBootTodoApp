@@ -1,17 +1,21 @@
 package com.rizwanmushtaq.models;
 
+import java.util.Date;
+
 public class Todo {
   private static int idCounter = 0;
   private int id;
   private String title;
   private String content;
   private String status;
+  private Date creationDate;
 
   public Todo() {
     this.setId(++idCounter);
     this.setTitle("default value");
     this.setContent("default content");
     this.setStatus("New");
+    this.setCreationDate(new Date());
   }
 
   public Todo(String title, String content, String status) {
@@ -19,6 +23,15 @@ public class Todo {
     this.setTitle(title);
     this.setContent(content);
     this.setStatus(status);
+    this.setCreationDate(new Date());
+  }
+
+  public Date getCreationDate() {
+    return creationDate;
+  }
+
+  private void setCreationDate(Date creationDate) {
+    this.creationDate = creationDate;
   }
 
   public int getId() {
