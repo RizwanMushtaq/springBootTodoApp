@@ -1,6 +1,8 @@
 package com.rizwanmushtaq.repositories;
 
+import com.rizwanmushtaq.exceptions.ResourceNotFoundException;
 import com.rizwanmushtaq.models.Todo;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -20,7 +22,8 @@ public abstract class TodoRepository {
         return todo;
       }
     }
-    return null;
+    throw new ResourceNotFoundException("Todo not found with ID: " + id,
+        HttpStatus.NOT_FOUND);
   }
 
   public static Todo createTodo(Todo todo) {
@@ -37,7 +40,8 @@ public abstract class TodoRepository {
         return todoItem;
       }
     }
-    return null;
+    throw new ResourceNotFoundException("Todo not found with ID: " + id,
+        HttpStatus.NOT_FOUND);
   }
 
   public static Todo deleteTodo(int id) {
@@ -47,6 +51,7 @@ public abstract class TodoRepository {
         return todo;
       }
     }
-    return null;
+    throw new ResourceNotFoundException("Todo not found with ID: " + id,
+        HttpStatus.NOT_FOUND);
   }
 }

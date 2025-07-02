@@ -2,7 +2,6 @@ package com.rizwanmushtaq.controllers;
 
 import com.rizwanmushtaq.models.Todo;
 import com.rizwanmushtaq.services.TodoService;
-import com.rizwanmushtaq.utils.ErrorResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -21,17 +20,13 @@ public class TodoController extends ApiBaseController {
   }
 
   @GetMapping("/todos/{id}")
-  public ResponseEntity<Object> getTodoById(@PathVariable int id) {
-    Todo todo = TodoService.getTodoById(id);
-    return todo != null ?
-        ResponseEntity.ok(todo) :
-        ResponseEntity.status(HttpStatus.NOT_FOUND).body(
-            new ErrorResponse("Todo with ID " + id + " not found"));
+  public ResponseEntity<Todo> getTodoById(@PathVariable int id) {
+    return ResponseEntity.ok(TodoService.getTodoById(id));
   }
 
   @PostMapping("/todos/create")
   public ResponseEntity<Todo> createTodo(@RequestBody Todo todo) {
-    logger.info("Created Todo" + todo.toString());
+    logger.info("Created Todo {}", todo.toString());
     return ResponseEntity.status(HttpStatus.CREATED).body(TodoService.createTodo(todo));
   }
 
@@ -42,12 +37,8 @@ public class TodoController extends ApiBaseController {
   }
 
   @DeleteMapping("/todos/delete/{id}")
-  public ResponseEntity<Object> deleteTodo(@PathVariable int id) {
-    Todo todo = TodoService.deleteTodo(id);
-    return todo != null ?
-        ResponseEntity.ok(todo) :
-        ResponseEntity.status(HttpStatus.NOT_FOUND).body(
-            new ErrorResponse("Todo with ID " + id + " not found"));
+  public ResponseEntity<Todo> deleteTodo(@PathVariable int id) {
+    return ResponseEntity.ok(TodoService.deleteTodo(id));
   }
 }
 
