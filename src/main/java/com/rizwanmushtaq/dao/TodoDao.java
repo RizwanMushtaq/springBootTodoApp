@@ -19,10 +19,11 @@ public class TodoDao {
     String createTableQuery = "CREATE TABLE IF NOT EXISTS todos ("
         + "id INT PRIMARY KEY, "
         + "title VARCHAR(255) NOT NULL, "
-        + "content TEXT, "
+        + "content VARCHAR(500) NOT NULL, "
         + "status VARCHAR(50) NOT NULL, "
-        + "creationDate dateTime NOT NULL"
+        + "creationDate DATETIME NOT NULL"
         + ")";
+    jdbcTemplate.update(createTableQuery);
   }
 
   public JdbcTemplate getJdbcTemplate() {
