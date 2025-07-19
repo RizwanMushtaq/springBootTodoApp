@@ -3,7 +3,6 @@ package com.rizwanmushtaq.models;
 import java.time.LocalDateTime;
 
 public class Todo {
-  private static int idCounter = 0;
   private int id;
   private String title;
   private String content;
@@ -11,34 +10,28 @@ public class Todo {
   private LocalDateTime creationDate;
 
   public Todo() {
-    this.setId(++idCounter);
-    this.setTitle("default value");
-    this.setContent("default content");
-    this.setStatus("New");
-    this.setCreationDate();
   }
 
-  public Todo(String title, String content, String status) {
-    this.setId(++idCounter);
+  public Todo(String title, String content, String status, LocalDateTime creationDate) {
     this.setTitle(title);
     this.setContent(content);
     this.setStatus(status);
-    this.setCreationDate();
+    this.setCreationDate(creationDate);
   }
 
   public LocalDateTime getCreationDate() {
     return creationDate;
   }
 
-  public void setCreationDate() {
-    this.creationDate = LocalDateTime.now();
+  public void setCreationDate(LocalDateTime creationDate) {
+    this.creationDate = creationDate;
   }
 
   public int getId() {
     return id;
   }
 
-  private void setId(int id) {
+  public void setId(int id) {
     this.id = id;
   }
 

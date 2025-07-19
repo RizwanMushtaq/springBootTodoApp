@@ -10,6 +10,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.jdbc.core.JdbcTemplate;
 
+import java.time.LocalDateTime;
+
 @SpringBootApplication
 public class SpringBootTodoAppApplication implements CommandLineRunner {
   Logger logger = LoggerFactory.getLogger(SpringBootTodoAppApplication.class);
@@ -23,9 +25,16 @@ public class SpringBootTodoAppApplication implements CommandLineRunner {
   @Override
   public void run(String... args) throws Exception {
     System.out.println("Spring Boot Todo App is running...");
-    Todo todo = new Todo("Learn Spring Boot", "Complete the Spring Boot tutorial", "In Progress");
+    Todo todo = new Todo("Learn Spring Boot", "Complete the Spring Boot " +
+        "tutorial", "In Progress", LocalDateTime.now());
     logger.info("Creating a new Todo: {}", todo);
     JdbcTemplate jdbcTemplate = new JdbcTemplate();
-    todoDao.saveTodo(todo);
+//    todoDao.saveTodo(todo);
+    todoDao.getTodoById(1);
+    todoDao.deleteTodoById(3);
+    Todo updatedTodo = new Todo();
+    updatedTodo.setTitle("Updated Title");
+    todoDao.updateTodo(updatedTodo, 4);
+    todoDao.getAllTodos();
   }
 }
