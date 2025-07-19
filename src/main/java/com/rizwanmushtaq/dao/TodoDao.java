@@ -7,8 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Component
 public class TodoDao {
@@ -49,37 +52,36 @@ public class TodoDao {
     return todo;
   }
 
-  public Todo[] getAllTodos() {
+  public List<Todo> getAllTodos() {
     String selectQuery = "SELECT * FROM todos";
-    Todo[] todos = jdbcTemplate.query(selectQuery, (rs, rowNum) -> {
+    List<Map<String, Object>> rows = jdbcTemplate.queryForList(selectQuery);
+    List<Todo> todos = rows.stream().map(row -> {
       Todo todo = new Todo();
-      todo.setId(rs.getInt("id"));
-      todo.setTitle(rs.getString("title"));
-      todo.setContent(rs.getString("content"));
-      todo.setStatus(rs.getString("status"));
-      todo.setCreationDate(rs.getTimestamp("creationDate").toLocalDateTime());
+      todo.setId((int) row.get("id"));
+      todo.setTitle((String) row.get("title"));
+      todo.setContent((String) row.get("content"));
+      todo.setStatus((String) row.get("status"));
+      todo.setCreationDate((LocalDateTime) row.get("creationDate"));
       return todo;
-    }).toArray(Todo[]::new);
-    logger.info("Retrieved Todos: {}", (Object) todos);
+    }).collect(Collectors.toList());
+    logger.info("Retrieved Todos: {}", todos);
     return todos;
   }
 
   public Todo getTodoById(int id) {
     String selectQuery = "SELECT * FROM todos WHERE id = ?";
-    Todo todo = jdbcTemplate.queryForObject(selectQuery, new Object[]{id}, (rs, rowNum) -> {
-      Todo t = new Todo();
-      t.setId(rs.getInt("id"));
-      t.setTitle(rs.getString("title"));
-      t.setContent(rs.getString("content"));
-      t.setStatus(rs.getString("status"));
-      t.setCreationDate(rs.getTimestamp("creationDate").toLocalDateTime());
-      return t;
-    });
+    Map<String, Object> result = jdbcTemplate.queryForMap(selectQuery, id);
+    Todo todo = new Todo();
+    todo.setId((int) result.get("id"));
+    todo.setTitle((String) result.get("title"));
+    todo.setContent((String) result.get("content"));
+    todo.setStatus((String) result.get("status"));
+    todo.setCreationDate((LocalDateTime) result.get("creationDate"));
     logger.info("Retrieved Todo: {}", todo);
     return todo;
   }
 
-  public Todo updateTodo(Todo partialTodo, int id) {
+  public Todo updateTodo(int id, Todo partialTodo) {
     StringBuilder updateQuery = new StringBuilder("UPDATE todos SET ");
     List<Object> params = new ArrayList<>();
     if (partialTodo.getTitle() != null) {

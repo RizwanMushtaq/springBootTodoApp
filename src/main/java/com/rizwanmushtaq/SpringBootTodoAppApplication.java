@@ -30,11 +30,11 @@ public class SpringBootTodoAppApplication implements CommandLineRunner {
     logger.info("Creating a new Todo: {}", todo);
     JdbcTemplate jdbcTemplate = new JdbcTemplate();
 //    todoDao.saveTodo(todo);
-    todoDao.getTodoById(1);
-    todoDao.deleteTodoById(3);
-    Todo updatedTodo = new Todo();
-    updatedTodo.setTitle("Updated Title");
-    todoDao.updateTodo(updatedTodo, 4);
+    todoDao.getTodoById(5);
+//    todoDao.deleteTodoById(3);
+//    Todo updatedTodo = new Todo();
+//    updatedTodo.setTitle("Updated Title");
+//    todoDao.updateTodo(updatedTodo, 4);
     todoDao.getAllTodos();
   }
 }
