@@ -1,29 +1,29 @@
 package com.rizwanmushtaq.models;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 
 public class Todo {
   private int id;
   private String title;
   private String content;
   private String status;
-  private LocalDateTime creationDate;
+  private Date creationDate;
 
   public Todo() {
   }
 
-  public Todo(String title, String content, String status, LocalDateTime creationDate) {
+  public Todo(String title, String content, String status, Date creationDate) {
     this.setTitle(title);
     this.setContent(content);
     this.setStatus(status);
     this.setCreationDate(creationDate);
   }
 
-  public LocalDateTime getCreationDate() {
+  public Date getCreationDate() {
     return creationDate;
   }
 
-  public void setCreationDate(LocalDateTime creationDate) {
+  public void setCreationDate(Date creationDate) {
     this.creationDate = creationDate;
   }
 

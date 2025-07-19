@@ -7,11 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 @Component
 public class TodoDao {
@@ -54,29 +51,15 @@ public class TodoDao {
 
   public List<Todo> getAllTodos() {
     String selectQuery = "SELECT * FROM todos";
-    List<Map<String, Object>> rows = jdbcTemplate.queryForList(selectQuery);
-    List<Todo> todos = rows.stream().map(row -> {
-      Todo todo = new Todo();
-      todo.setId((int) row.get("id"));
-      todo.setTitle((String) row.get("title"));
-      todo.setContent((String) row.get("content"));
-      todo.setStatus((String) row.get("status"));
-      todo.setCreationDate((LocalDateTime) row.get("creationDate"));
-      return todo;
-    }).collect(Collectors.toList());
+    List<Todo> todos = jdbcTemplate.query(selectQuery, new TodoDaoRowMapper());
     logger.info("Retrieved Todos: {}", todos);
     return todos;
   }
 
   public Todo getTodoById(int id) {
     String selectQuery = "SELECT * FROM todos WHERE id = ?";
-    Map<String, Object> result = jdbcTemplate.queryForMap(selectQuery, id);
-    Todo todo = new Todo();
-    todo.setId((int) result.get("id"));
-    todo.setTitle((String) result.get("title"));
-    todo.setContent((String) result.get("content"));
-    todo.setStatus((String) result.get("status"));
-    todo.setCreationDate((LocalDateTime) result.get("creationDate"));
+    Todo todo = (Todo) jdbcTemplate.queryForObject(selectQuery,
+        new TodoDaoRowMapper(), id);
     logger.info("Retrieved Todo: {}", todo);
     return todo;
   }
