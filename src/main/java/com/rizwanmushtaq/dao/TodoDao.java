@@ -94,10 +94,11 @@ public class TodoDao {
     return getTodoById(id);
   }
 
-  public int deleteTodoById(int id) {
+  public Todo deleteTodoById(int id) {
+    Todo todo = getTodoById(id);
     String deleteQuery = "DELETE FROM todos WHERE id = ?";
     int rowsAffected = jdbcTemplate.update(deleteQuery, id);
     logger.info("Rows affected by delete: {}", rowsAffected);
-    return id;
+    return todo;
   }
 }
