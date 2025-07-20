@@ -29,6 +29,9 @@ public class TodoController extends ApiBaseController {
 
   @PostMapping("/todos/create")
   public ResponseEntity<Todo> createTodo(@RequestBody Todo todo) {
+    if (todo.getCreationDate() == null) {
+      todo.setCreationDate(new java.util.Date());
+    }
     logger.info("Created Todo {}", todo.toString());
     return ResponseEntity.status(HttpStatus.CREATED).body(todoService.createTodo(todo));
   }

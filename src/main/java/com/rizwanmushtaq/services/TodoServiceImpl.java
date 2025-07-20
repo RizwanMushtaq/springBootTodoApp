@@ -3,9 +3,11 @@ package com.rizwanmushtaq.services;
 import com.rizwanmushtaq.dao.TodoDao;
 import com.rizwanmushtaq.models.Todo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class TodoServiceImpl implements TodoService {
   @Autowired
   private TodoDao todoDao;
