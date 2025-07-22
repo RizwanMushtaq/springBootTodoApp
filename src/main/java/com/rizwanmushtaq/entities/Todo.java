@@ -11,13 +11,13 @@ public class Todo {
   @GeneratedValue(strategy = GenerationType.UUID)
   @Column(name = "todo_id")
   private String id;
-  @Column(name = "todo_title", length = 100, nullable = false)
+  @Column(name = "todo_title", length = 100)
   private String title;
-  @Column(name = "todo_content", length = 500, nullable = false)
+  @Column(name = "todo_content", length = 500)
   private String content;
-  @Column(name = "todo_status", length = 20, nullable = false)
+  @Column(name = "todo_status", length = 20)
   private String status;
-  @Column(name = "todo_creation_date", nullable = false)
+  @Column(name = "todo_creation_date")
   private Date creationDate;
 
   public Todo() {
