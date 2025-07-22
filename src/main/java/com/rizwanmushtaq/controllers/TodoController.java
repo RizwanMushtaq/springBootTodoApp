@@ -1,6 +1,6 @@
 package com.rizwanmushtaq.controllers;
 
-import com.rizwanmushtaq.models.Todo;
+import com.rizwanmushtaq.entities.Todo;
 import com.rizwanmushtaq.services.TodoService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,7 +23,7 @@ public class TodoController extends ApiBaseController {
   }
 
   @GetMapping("/todos/{id}")
-  public ResponseEntity<Todo> getTodoById(@PathVariable int id) {
+  public ResponseEntity<Todo> getTodoById(@PathVariable String id) {
     return ResponseEntity.ok(todoService.getTodoById(id));
   }
 
@@ -37,13 +37,13 @@ public class TodoController extends ApiBaseController {
   }
 
   @PutMapping("/todos/update/{id}")
-  public ResponseEntity<Todo> updateTodo(@PathVariable int id,
+  public ResponseEntity<Todo> updateTodo(@PathVariable String id,
                                          @RequestBody Todo todo) {
     return ResponseEntity.ok(todoService.updateTodo(id, todo));
   }
 
   @DeleteMapping("/todos/delete/{id}")
-  public ResponseEntity<Todo> deleteTodo(@PathVariable int id) {
+  public ResponseEntity<Todo> deleteTodo(@PathVariable String id) {
     return ResponseEntity.ok(todoService.deleteTodo(id));
   }
 }

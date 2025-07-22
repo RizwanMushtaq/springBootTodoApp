@@ -1,12 +1,23 @@
-package com.rizwanmushtaq.models;
+package com.rizwanmushtaq.entities;
+
+import jakarta.persistence.*;
 
 import java.util.Date;
 
+@Entity
+@Table(name = "todos")
 public class Todo {
-  private int id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.UUID)
+  @Column(name = "todo_id")
+  private String id;
+  @Column(name = "todo_title", length = 100, nullable = false)
   private String title;
+  @Column(name = "todo_content", length = 500, nullable = false)
   private String content;
+  @Column(name = "todo_status", length = 20, nullable = false)
   private String status;
+  @Column(name = "todo_creation_date", nullable = false)
   private Date creationDate;
 
   public Todo() {
@@ -27,11 +38,11 @@ public class Todo {
     this.creationDate = creationDate;
   }
 
-  public int getId() {
+  public String getId() {
     return id;
   }
 
-  public void setId(int id) {
+  public void setId(String id) {
     this.id = id;
   }
 
