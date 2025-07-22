@@ -4,14 +4,12 @@ import com.rizwanmushtaq.entities.Todo;
 import com.rizwanmushtaq.exceptions.ResourceNotFoundException;
 import com.rizwanmushtaq.repositories.TodoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Primary;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-@Primary
 public class TodoServiceJPAImpl implements TodoService {
   @Autowired
   private TodoRepository todoRepository;
